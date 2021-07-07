@@ -13,5 +13,7 @@ namespace ASPNetCoreEFCoreFacit.Data
         public DbSet<Bil> Bilar { get; set; }
         public DbSet<Lastbil> Lastbilar { get; set; }
         public DbSet<Manufacturer> Manufacturers { get; set; }
+        public DbSet<UserRegistration> UserRegistrations { get; set; }
+        public DbSet<Country> Countries { get; set; }
     }
 }

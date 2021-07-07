@@ -9,13 +9,26 @@ namespace ASPNetCoreEFCoreFacit.Data
         {
             dbContext.Database.Migrate();
 
+            SeedCountries(dbContext);
+
             SeedManufacturers(dbContext);
             SeedBilar(dbContext);
             SeedLastbilar(dbContext);
             FixManufacturersForBilAndLastbil(dbContext);
         }
 
-        private static void FixManufacturersForBilAndLastbil(ApplicationDbContext dbContext)
+        private static void SeedCountries(ApplicationDbContext dbContext)
+        {
+            if(!dbContext.Countries.Any(r=>r.Namn == "Sverige"))
+                dbContext.Countries.Add(new Country {Namn="Sweden"});
+            if (!dbContext.Countries.Any(r => r.Namn == "Danmark"))
+                dbContext.Countries.Add(new Country { Namn = "Danmark" });
+            if (!dbContext.Countries.Any(r => r.Namn == "Norge"))
+                dbContext.Countries.Add(new Country { Namn = "Norge" });
+
+        }
+
+        static void FixManufacturersForBilAndLastbil(ApplicationDbContext dbContext)
         {
             var volvo = dbContext.Manufacturers.First(r => r.Namn == "Volvo");
             var scania = dbContext.Manufacturers.First(r => r.Namn == "Scania");

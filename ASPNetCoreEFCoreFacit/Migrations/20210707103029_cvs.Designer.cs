@@ -4,14 +4,16 @@ using ASPNetCoreEFCoreFacit.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ASPNetCoreEFCoreFacit.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210707103029_cvs")]
+    partial class cvs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,9 +83,6 @@ namespace ASPNetCoreEFCoreFacit.Migrations
                     b.Property<string>("Namn")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("PossibleWorkLocation")
-                        .HasColumnType("int");
 
                     b.Property<string>("Postnr")
                         .HasMaxLength(10)
@@ -191,26 +190,6 @@ namespace ASPNetCoreEFCoreFacit.Migrations
                     b.ToTable("UserRegistrations");
                 });
 
-            modelBuilder.Entity("ASPNetCoreEFCoreFacit.Data.Utbildning", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CVId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Namn")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CVId");
-
-                    b.ToTable("Utbildningar");
-                });
-
             modelBuilder.Entity("ASPNetCoreEFCoreFacit.Data.Bil", b =>
                 {
                     b.HasOne("ASPNetCoreEFCoreFacit.Data.Manufacturer", "Manufacturer")
@@ -236,18 +215,6 @@ namespace ASPNetCoreEFCoreFacit.Migrations
                         .HasForeignKey("CountryId");
 
                     b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("ASPNetCoreEFCoreFacit.Data.Utbildning", b =>
-                {
-                    b.HasOne("ASPNetCoreEFCoreFacit.Data.CV", null)
-                        .WithMany("Utbildningar")
-                        .HasForeignKey("CVId");
-                });
-
-            modelBuilder.Entity("ASPNetCoreEFCoreFacit.Data.CV", b =>
-                {
-                    b.Navigation("Utbildningar");
                 });
 #pragma warning restore 612, 618
         }

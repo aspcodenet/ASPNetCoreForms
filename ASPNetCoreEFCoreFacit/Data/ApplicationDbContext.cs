@@ -15,5 +15,7 @@ namespace ASPNetCoreEFCoreFacit.Data
         public DbSet<Manufacturer> Manufacturers { get; set; }
         public DbSet<UserRegistration> UserRegistrations { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<CV> CVs { get; set; }
+        public DbSet<Utbildning> Utbildningar { get; set; }
     }
 }

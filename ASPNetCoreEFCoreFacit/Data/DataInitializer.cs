@@ -10,11 +10,23 @@ namespace ASPNetCoreEFCoreFacit.Data
             dbContext.Database.Migrate();
 
             SeedCountries(dbContext);
+            SeedUtbildningar(dbContext);
 
             SeedManufacturers(dbContext);
             SeedBilar(dbContext);
             SeedLastbilar(dbContext);
             FixManufacturersForBilAndLastbil(dbContext);
+        }
+
+        private static void SeedUtbildningar(ApplicationDbContext dbContext)
+        {
+            if (!dbContext.Utbildningar.Any(r => r.Namn == "Högskoleutbildning"))
+                dbContext.Utbildningar.Add(new Utbildning{ Namn = "Högskoleutbildning" });
+            if (!dbContext.Utbildningar.Any(r => r.Namn == "Yrkeshögskola"))
+                dbContext.Utbildningar.Add(new Utbildning { Namn = "Yrkeshögskola" });
+            if (!dbContext.Utbildningar.Any(r => r.Namn == "Gymnasial utbildning"))
+                dbContext.Utbildningar.Add(new Utbildning { Namn = "Gymnasial utbildning" });
+            dbContext.SaveChanges();
         }
 
         private static void SeedCountries(ApplicationDbContext dbContext)
@@ -25,7 +37,7 @@ namespace ASPNetCoreEFCoreFacit.Data
                 dbContext.Countries.Add(new Country { Namn = "Danmark" });
             if (!dbContext.Countries.Any(r => r.Namn == "Norge"))
                 dbContext.Countries.Add(new Country { Namn = "Norge" });
-
+            dbContext.SaveChanges();
         }
 
         static void FixManufacturersForBilAndLastbil(ApplicationDbContext dbContext)
